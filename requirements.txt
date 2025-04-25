@@ -1,3 +1,8 @@
 flask
 anthropic
 python-dotenv
+requests
+pytesseract
+pdfminer.six
+python-docx
+Pillow

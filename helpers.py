@@ -17,7 +17,8 @@ def generate_ai_response(user_input):
         Format your response with:
         1. A summary of the symptoms
         2. Urgency level (Mild, Moderate, or Severe)
-        3. A recommendation
+        3. Diet recommendations
+        4. Precautions
         """
         
         # Make the API call
@@ -122,3 +123,55 @@ def generate_mock_response(user_input):
     response_parts.append("\nNote: This is an AI-generated assessment and should not replace professional medical advice.")
     
     return "\n".join(response_parts)
+
+def analyze_medical_report(report_text):
+    """Analyze medical report and explain medical terminology"""
+    try:
+        # Create a specific prompt for the medical report analyzer
+        analysis_prompt = f"""
+        I'm going to provide you with text extracted from a medical report. Please:
+
+        1. Summarize the key findings of the report in simple language
+        2. Identify and explain important medical terms in plain language
+        3. Highlight any abnormal results and explain what they could mean
+        4. Provide general recommendations based on the findings
+        5. Format your response to be easily readable with sections and explanations
+
+        Here's the text from the medical report:
+
+        {report_text}
+        
+        When explaining medical terms, use this format: 
+        - Medical term: [Simple explanation]
+
+        For your summary, focus on the most important information a patient would need to understand.
+        """
+        
+        # Make the API call
+        response = client.messages.create(
+            # model="claude-3-sonnet-20240229",  # Using a more powerful model for in-depth analysis
+            model="claude-3-opus-20240229", # or
+            max_tokens=1500,
+            messages=[
+                {
+                    "role": "user", 
+                    "content": analysis_prompt
+                }
+            ]
+        )
+        
+        # Process the response to highlight medical terms
+        result = response.content[0].text
+        
+        # Enhance the output by adding HTML formatting
+        enhanced_result = enhance_analysis_with_html(result)
+        
+        return enhanced_result
+    except Exception as e:
+        return f"Sorry, I couldn't analyze your medical report: {str(e)}"
+
+def enhance_analysis_with_html(analysis_text):
+    """Add HTML formatting to make the medical report analysis more readable"""
+    # This is a placeholder function that you can implement to add HTML formatting
+    # For now, we'll just return the original text
+    return analysis_text

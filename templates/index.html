@@ -160,6 +160,17 @@
       <button class="mic-btn" id="speechButton" onclick="toggleVoiceInput()">🎤 Speak Symptoms</button>
       <button class="check-btn" onclick="checkSymptoms()">Check Symptoms</button>
       <button class="clear-btn" onclick="clearAll()">Clear All</button>
+
+      <button class="check-btn" onclick="window.location.href='/bmi-calculator'">Go to BMI Calculator</button>
+
+      <!-- Add this button before the closing </div> tag, after the other buttons -->
+      <button class="check-btn" onclick="window.location.href='/medical-facilities'">Find Nearby Medical Help</button>
+
+      <button class="check-btn" onclick="window.location.href='/report-analyzer'">Medical Report Analyzer</button>
+
+      <!-- Add this button in your index.html file, in the same section as your other navigation buttons -->
+      <button class="check-btn" onclick="window.location.href='/product-analyzer'">Product Health Analyzer</button>
+
     </div>
     <div id="permission-message">Please allow microphone access to use speech recognition.</div>
     
@@ -354,10 +365,20 @@
           console.error('Error checking microphone permission:', error);
         });
 
-        navigator.mediaDevices.getUserMedia({ audio: true })
+  //       navigator.mediaDevices.getUserMedia({ audio: true })
+  // .then(stream => {
+  //   stream.getTracks().forEach(track => track.stop()); // Close stream after check
+  //   startRecording(); // Start speech recognition
+  // })
+  // .catch(err => {
+  //   console.error('Microphone not accessible:', err);
+  //   document.getElementById('permission-message').style.display = 'block';
+  // });
+  navigator.mediaDevices.getUserMedia({ audio: true })
   .then(stream => {
     stream.getTracks().forEach(track => track.stop()); // Close stream after check
-    startRecording(); // Start speech recognition
+    // Don't auto-start recording - wait for user interaction instead
+    // startRecording(); // Remove this line
   })
   .catch(err => {
     console.error('Microphone not accessible:', err);
