@@ -6,3 +6,4 @@ pytesseract
 pdfminer.six
 python-docx
 Pillow
+gunicorn
