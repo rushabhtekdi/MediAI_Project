@@ -6,4 +6,4 @@ pytesseract
 pdfminer.six
 python-docx
 Pillow
-gunicorn
+gunicorn==23.0.0
