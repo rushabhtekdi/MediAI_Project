@@ -33,7 +33,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 
 # Use environment variable or fallback to the hardcoded value as a last resort
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY","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")
 LOCATIONIQ_API_KEY = os.getenv("LOCATIONIQ_API_KEY", "pk.0362f2355d5bdc89246e0e1a51dfd9e0")
 
 def allowed_file(filename):
